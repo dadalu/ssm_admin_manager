@@ -1,0 +1,54 @@
+[{
+    "title": "首页",
+    "icon": " ",
+    "spread": true,
+    "href": ""
+  },
+  {
+    "title": "个人中心",
+    "icon": "fa-stop-circle",
+    "spread": true,
+    "href": "http://www.baidu.com",
+    "children": [
+      {
+        "title": "我的档案",
+        "icon": "",
+        "href": "lala.html",
+        "spread": true,
+        "children": [
+          {
+            "title": "三级导航",
+            "icon": " ",
+            "href": "button.html"
+          },
+          {
+            "title": "三级导航",
+            "icon": " ",
+            "href": "buttwswon.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "用户中心",
+    "icon": "fa-stop-circle",
+    "spread": true,
+    "href": "../static/user/userInfo.html"
+
+  },
+  {
+    "title": "权限管理",
+    "icon": "fa-stop-circle",
+    "spread": true,
+    "href": "../static/privilege/getPrivilege.html"
+
+  },
+  {
+    "title": "角色管理",
+    "icon": "fa-stop-circle",
+    "spread": true,
+    "href": "http://www.baidu.com"
+
+  }
+]
