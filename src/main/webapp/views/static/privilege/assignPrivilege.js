@@ -32,17 +32,23 @@ layui.use(['form', 'layer', 'jquery'], function () {
         //弹出loading
 
             var obj = document.getElementsByName("test");
-            var check_val = [];
+            var arr = [];
             for(var k in obj){
-                if(obj[k].checked)
-                    check_val.push(obj[k].value);
+                if(obj[k].checked){
+                    var privilege = {};
+                    privilege['privilegeId'] = obj[k].value;
+                    arr.push(privilege);
+                }
             }
+        arr.push({'roleId':sessionStorage.getItem("assignRoleId")});
+            var params = JSON.stringify(arr);
         var msg = document.getElementById("register");
         var index = layer.msg('正在提交，请稍候', {icon: 16, time: false});
         $.ajax({
             type: "post",
             url: "/privilege/assignPrivilege.do",
-            data: check_val,
+            data:  "params="+params,
+            dataType:"json",
             success: function (data) {
                 layer.close(index);
                 if (data.code == 0||data.code == '0') {

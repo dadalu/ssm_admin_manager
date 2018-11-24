@@ -1,15 +1,14 @@
 package com.wang.privilege.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.sun.tools.javac.code.Attribute;
 import com.wang.privilege.service.PrivilegeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 @RestController
 @RequestMapping("privilege")
@@ -55,10 +54,18 @@ public class PrivilegeController {
         service.deletePrivilege(params);
         return null;
     }
-    @RequestMapping("/assignPrivilege.do")
-    public Map assignPrivilege(@RequestParam Map map){
-        service.assignPrivilege();
-        return null;
-    }
+    @RequestMapping(value = "/assignPrivilege.do",method = RequestMethod.POST)
+    public Map assignPrivilege(@RequestParam Map map) {
+        String str = (String)map.get("params");
+        List<Map<String, String>> iterator = (List<Map<String, String>>)JSONArray.parse(str);
+        for (Map<String,String> mapList:iterator
+             ) {
+            for (Map.Entry entry:mapList.entrySet()
+                 ) {
+                System.out.println(entry.getKey()+" "+entry.getValue());
+            }
+        }
 
+        return map;
+    }
 }

@@ -14,7 +14,7 @@ public interface PrivilegeService {
      * @param map
      */
     void deletePrivilege(Map map);
-    void assignPrivilege();
+    void assignPrivilege(Map map);
     /**
      *查看角色
      */

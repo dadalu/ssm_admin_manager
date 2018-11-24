@@ -31,6 +31,8 @@ layui.use('table', function(){
             });
         } else if(layEvent === 'edit'){ //编辑
             //do something
+            var assignRoleId = data.role_id;
+            sessionStorage.setItem("assignRoleId",assignRoleId);
             var index = layui.layer.open({
                 title : "分配权限",
                 type : 2,

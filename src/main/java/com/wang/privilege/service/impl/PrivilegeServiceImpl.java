@@ -32,14 +32,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
         System.out.println(returnList);
         return returnList;
     }
-    public void assignPrivilege(){
-        List<Map> list = new ArrayList();
-        for (int i = 0;i<10;i++) {
-            Map map=new HashMap();
-            map.put("roleId",1);
-            map.put("privilegeId",i);
-            list.add(map);
-        }
-        mapper.assignPrivilege(list);
+    public void assignPrivilege(Map map){
+        mapper.assignPrivilege(map);
     }
 }

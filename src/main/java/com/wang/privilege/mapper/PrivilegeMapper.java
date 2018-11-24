@@ -27,5 +27,5 @@ public interface PrivilegeMapper {
      * @Param [list]
      * @return void
      **/
-    void assignPrivilege(List<Map> list);
+    void assignPrivilege(Map map);
 }

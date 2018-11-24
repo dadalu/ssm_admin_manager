@@ -22,11 +22,9 @@
     </select>
     <!--分配权限给角色-->
     <insert id="assignPrivilege" parameterType="Map">
-        INSERT INTO privilege(privilege_name)
-        values(#{privilegeName,jdbcType=VARCHAR});
-        INSERT INTO role_privilege(role_id,privilege_id)
-        select r.role_id, p.privilege_id from privilege p,role r where
-        privilege_name = #{privilegeName,jdbcType=VARCHAR}
-        and role_name = '超级管理员';
+        INSERT INTO role_privilege(role_id,privilege_id) values
+        <foreach collection="list" item = "item" separator=",">
+            (#{roleId,jdbcType=DECIMAL},#{privilegeId,jdbcType=DECIMAL})
+        </foreach>
     </insert>
 </mapper>
