@@ -5,7 +5,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
         $ = layui.jquery;
 
 
-    form.on("submit(addUser)", function (data) {
+    form.on("submit(addRole)", function (data) {
         // window.sessionStorage.setItem("addUser",JSON.stringify(addUserArray));
         //弹出loading
         var formjson = $("#addUserForm").serialize();
@@ -19,7 +19,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
                 data = JSON.parse(data);
                 layer.close(index);
                 if (data.code == 0) {
-                    layer.msg("用户添加成功!");
+                    layer.msg("角色添加成功!");
                     layer.close(parent.index);
                     parent.init();
 

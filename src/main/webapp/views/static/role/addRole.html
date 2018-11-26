@@ -19,8 +19,21 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">角色等级</label>
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="addUser">立即添加</button>
+            <input type="radio" name="roleLevel" value="高级" title="高级">
+            <input type="radio" name="roleLevel" value="低级" title="低级">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色说明</label>
+        <div class="layui-input-block">
+            <input type="text" name="roleComment" required lay-verify="required" autocomplete="off" placeholder="请输入角色说明" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="addRole">立即添加</button>
         </div>
     </div>
     <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->

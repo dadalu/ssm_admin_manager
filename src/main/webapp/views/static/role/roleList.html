@@ -9,13 +9,51 @@
     <title>我的信息</title>
 </head>
 <body>
-<!--<div class="demoTable">
-    搜索权限：
-    <div class="layui-inline">
-        <input class="layui-input" name="keyword" id="demoReload" autocomplete="off">
+<!--表头工具-->
+<blockquote class="layui-elem-quote news_search">
+    <li>
+        <div class="layui-input-block" style="float: left; position: relative;">
+            <label class="layui-form-label">搜索</label>
+            <input style="width: auto;" type="text" id="roleName" name="select_orderId" lay-verify="required" placeholder="请输入角色名" autocomplete="off" class="layui-input">
+        </div>
+        <button class="layui-btn" lay-submit="" id="searchBtn" data-type="getInfo" style="float: left;">搜索</button>
+    </li>
+    <div class="layui-inline addRole" style="display:none">
+        <a class="layui-btn layui-btn-normal roleAdd_btn">添加角色</a>
     </div>
-    <button class="layui-btn" data-type="reload">搜索</button>
-</div>-->
+</blockquote>
+<!--弹出窗添加角色信息页面-->
+<div class="layui-row" id="addRole" style="display:none;">
+    <div class="layui-col-md10">
+        <form class="layui-form layui-from-pane" action="" style="margin-top:20px" >
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userName" required lay-verify="required" autocomplete="off" placeholder="请输入角色名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色等级</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="role-level" value="高级" title="高级">
+                    <input type="radio" name="role-level" value="低级" title="低级">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色说明</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" required lay-verify="required" autocomplete="off" placeholder="请输入角色说明" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-top:40px">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="addRole">确认添加</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <table id="roleInfo" lay-filter="test"></table>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs role-privilege" id="assignRole"lay-event="edit">分配权限</a>

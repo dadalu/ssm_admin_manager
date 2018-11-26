@@ -23,13 +23,13 @@ public class RoleController {
      * @return java.util.Map
      **/
     @RequestMapping("/getRole.do")
-    public Map getRole(){
+    public Map getRole(@RequestParam Map map){
         int code =0;
         String message = "角色查询成功";
         Map returnMap = new HashMap();
         List list = null;
         try {
-            list = service.getRole();
+            list = service.getRole(map);
         } catch (Exception e) {
             code=1;
             message = "角色查询失败";

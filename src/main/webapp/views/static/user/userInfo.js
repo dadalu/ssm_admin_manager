@@ -1,6 +1,7 @@
-layui.use(['table','element','laypage'], function(){
+layui.use(['table','element','form','jquery'], function(){
     var table = layui.table;
-    var laypage = layui.laypage;
+    var $ = layui.jquery;
+    var form = layui.form;
     var response = null;
     //初始化表单信息
     table.render({
@@ -27,6 +28,7 @@ layui.use(['table','element','laypage'], function(){
             var roleId = sessionStorage.getItem("roleId");
             if(roleId==102||roleId==101){
                 $(".user-view").hide();
+                $(".user-edit").show();
                 $(".user-delete").show();
                 //$(".user-edit").show();
             }/*else if(roleId==107){
@@ -52,12 +54,13 @@ layui.use(['table','element','laypage'], function(){
             area: ['800px', '600px'],
             scrollbar: false,
             content : '../user/addUser.html',
-            success : function(layero, index){
+            success : function(data){
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500)
+
             }
         })
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -78,34 +81,28 @@ layui.use(['table','element','laypage'], function(){
             var id = data.user_id;
             if(id==100001||id==100002||id==100004||id==100003){
                 layer.confirm('该用户为管理员，删除后，相关组组成员将会同时被删除,真的删除行么', function(index) {
-                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                        layer.close(index);
-                        //向服务端发送删除指令
-                        onDelete(data);
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    onDelete(obj);
+                    //obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 })
             }else{
                 layer.confirm('真的删除行么', function(index) {
-                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                        layer.close(index);
-                        //向服务端发送删除指令
-                        onDelete(data);
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    onDelete(obj);
+                    //obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 })
             }
-        } else if(layEvent === 'edit'){ //编辑
-            layer.prompt({
-                formType: 2
-                ,title: '修改 ID 为 ['+ data.id +'] 的访问量'
-                ,value: data.uv
-            }, function(value, index){
-                //这里一般是发送修改的Ajax请求
-                onEdit(data,value,index,obj);
+        } else if(layEvent === 'user-edit') { //编辑
+            layer.open({
+//layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                type: 1,
+                title: "修改采集设备信息",
+                area: ['420px', '330px'],
+                content: $("#userUpdate")//引用的弹出层的页面层的方式加载修改界面表单 });
             });
-            //do something
-            //同步更新缓存对应的值
-            obj.update({
-                username: '123'
-                ,title: 'xxx'
-            });
+            setFormValue(obj,data);
         }
     });
     //搜索
@@ -143,49 +140,70 @@ layui.use(['table','element','laypage'], function(){
     });
 
 
-    layui.$('#searchEmailCompany').on('click', function () {
+    /*layui.$('#searchEmailCompany').on('click', function () {
         ids=new Array();
         var type = layui.$(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
-    element.init();
+    element.init();*/
     //删除
-    function onDelete(data){
+    function onDelete(obj){
+        var data = obj.data;
         var user_id = data.user_id;
         layui.jquery.ajax({
             //测试数据
             //url: "../main/demo.json",
             //实际请求
             url: "/user/deleteUser.do",
-            data:"userId="+user_id,
+            data:{userId:user_id},
             method: 'POST',
             success: function(res) {
+                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 res = JSON.parse(res);
                 layer.msg(res.message);
             }
         })
     };
-    function  onEdit(data,value,index,obj) {
-        $.ajax({
-            url: "/user/updateUser.do",
-            type: "POST",
-            data:{"uvid":data.id,"memthodname":"edituv","aid":data.aid,"uv":value},
-            dataType: "json",
-            success: function(data){
-
-                if(data.state==1){
-                    //关闭弹框
-                    layer.close(index);
-                    //同步更新表格和缓存对应的值
-                    obj.update({
-                        uv: value
-                    });
-                    layer.msg("修改成功", {icon: 6});
-                }else{
-                    layer.msg("修改失败", {icon: 5});
+    //监听弹出框表单提交，massage是修改界面的表单数据'submit(demo11),是修改按钮的绑定
+    function setFormValue(obj,data){
+        form.on('submit(demo11)', function(data) {
+            $.ajax({
+                url:'/user/updateUserInfo.do',
+                async:true,
+                type:'POST',
+                data:{userName:data.field.userName,
+                    phone:data.field.phone,
+                    sign:data.field.sign,
+                    classify:data.field.classify,
+                    department:data.field.department,
+                    email:data.field.email,
+                    userId:obj.data.user_id
+                    },
+                success:function (msg) {
+                    msg = JSON.parse(msg);
+                    //取得返回数据（Sting类型的字符串）的信息进行取值判断
+                    if(msg.code==0){
+                        layer.closeAll('loading');
+                        layer.load(2);
+                        layer.msg("修改成功", {icon: 6});
+                        setTimeout(function(){
+                            obj.update({
+                                user_name:data.field.userName,
+                                phone:data.field.phone,
+                                sign:data.field.sign,
+                                classify:data.field.classify,
+                                department:data.field.department,
+                                email:data.field.email
+                            });
+                            //修改成功修改表格数据不进行跳转
+                            layer.closeAll();//关闭所有的弹出层
+                        }, 1000); //加载层-风格
+                    }else{
+                        layer.msg("修改失败", {icon: 5});
+                    }
                 }
-            }
-
-        });
-    };
+            });
+            return false;
+        })
+    }
 });

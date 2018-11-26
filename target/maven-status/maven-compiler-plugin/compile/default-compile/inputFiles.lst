@@ -12,7 +12,6 @@ G:\ssm_admin_manager\src\main\java\com\wang\privilege\controller\PrivilegeContro
 G:\ssm_admin_manager\src\main\java\com\wang\login\service\LoginService.java
 G:\ssm_admin_manager\src\main\java\com\wang\user\dao\UserDao.java
 G:\ssm_admin_manager\src\main\java\com\wang\user\service\impl\UserGroupServiceImpl.java
-G:\ssm_admin_manager\src\main\java\com\wang\user\controller\LoginController.java
 G:\ssm_admin_manager\src\main\java\com\wang\role\service\impl\RoleServiceImpl.java
 G:\ssm_admin_manager\src\main\java\com\wang\login\controller\LoginController.java
 G:\ssm_admin_manager\src\main\java\com\wang\role\controller\RoleController.java

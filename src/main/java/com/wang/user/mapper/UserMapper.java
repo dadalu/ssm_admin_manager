@@ -28,6 +28,13 @@ public interface UserMapper {
      * @return void
      **/
     void insertUser(Map map);
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 更新用户
+     * @Param [map]
+     * @return void
+     **/
     void updateUser(Map map);
     /*
     *
@@ -45,8 +52,29 @@ public interface UserMapper {
      * @return java.util.List
      **/
     List getUserPrivateInfo(Map map);
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 获取用户数
+     * @Param [map]
+     * @return java.util.Map
+     **/
     Map getUserCount(Map map);
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 
+     * @Param [map]
+     * @return java.util.List
+     **/
     List selectUserInGroup(Map map);
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 删除管理员用户
+     * @Param [list]
+     * @return void
+     **/
     void deleteAdmin(List list);
 
 }

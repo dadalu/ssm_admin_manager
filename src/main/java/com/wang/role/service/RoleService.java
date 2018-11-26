@@ -20,5 +20,5 @@ public interface RoleService {
     /**
      *查看角色
      */
-    List getRole();
+    List getRole(Map map);
 }

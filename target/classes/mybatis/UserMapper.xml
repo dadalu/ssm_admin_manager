@@ -41,21 +41,24 @@
         and r.role_id = #{roleId,jdbcType = DECIMAL};
     </insert>
     <!--修改用户-->
-    <insert id="updateUser" parameterType="map">
+    <update id="updateUser" parameterType="map">
         update user set
-        user_name=#{userName,jdbcType = VARCHAR},
-        password=#{password,jdbcType = VARCHAR},
-        phone=#{phone,jdbcType = DECIMAL},
-        email=#{email,jdbcType = VARCHAR},
-        department=#{department,jdbcType = VARCHAR},
+        <if test="userName!=null">user_name= #{userName,jdbcType = VARCHAR},</if>
+        <if test="phone!=null">phone= #{phone,jdbcType = VARCHAR},</if>
+        <if test="email!=null">email= #{email,jdbcType = VARCHAR},</if>
+        <if test="sex!=null">sex = #{sex,jdbcType = DECIMAL},</if>
+        <if test="sign!=null">sign=#{sign,jdbcType = VARCHAR},</if>
+        <if test="classify!=null">classify=#{classify,jdbcType = VARCHAR},</if>
+        <if test="department!=null">department=#{department,jdbcType = VARCHAR}</if>
+        where user_id = #{userId,jdbcType = DECIMAL}
+    </update>
+    <!-- /*department=#{department,jdbcType = VARCHAR},
         classify=#{classify,jdbcType = VARCHAR},
         sign=#{sign,jdbcType = VARCHAR},
-        sex=#{sex,jdbcType = VARCHAR}
-
-    </insert>
+        sex=#{sex,jdbcType = VARCHAR}*/-->
     <!--删除用户，设置删除标志位为1，并不删除实际数据-->
     <update id="deleteUser" parameterType="map">
-        update user set flag = 1 where user_name = #{userId,jdbcType=DECIMAL}
+        update user set flag = 1 where user_id = #{userId,jdbcType=DECIMAL}
     </update>
     <!--选择管理员所在组的所有用户-->
     <select id="selectUserInGroup" parameterType="map" resultType="map">

@@ -35,6 +35,13 @@ public class MenuController {
         System.out.println(returnList);
         return returnList;
     }
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 添加菜单
+     * @Param [map]
+     * @return java.util.Map
+     **/
     @RequestMapping("/insertMenu.do")
     public Map insertMenu(@RequestParam Map map){
         service.insertMenu(map);

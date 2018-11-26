@@ -26,9 +26,58 @@
 <div class="layui-tab-item">
     <div id="pageDemo"></div>
 </div>
+<!--弹出窗修改用户信息页面-->
+<div class="layui-row" id="userUpdate" style="display:none;">
+    <div class="layui-col-md10">
+        <form class="layui-form layui-from-pane" action="" style="margin-top:20px" >
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userName" required lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phone" required lay-verify="required" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" required lay-verify="required" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工作信条</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sign" required lay-verify="required" autocomplete="off" placeholder="请输入工作信条" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">职位</label>
+                <div class="layui-input-block">
+                    <input type="text" name="classify" required lay-verify="required" autocomplete="off" placeholder="请输入职位" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门</label>
+                <div class="layui-input-block">
+                    <input type="text" name="department" required lay-verify="required" autocomplete="off" placeholder="请输入部门" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-top:40px">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo11">确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-xs user-view" lay-event="detail" style="display:none">查看</a>
-    <a class="layui-btn layui-btn-xs user-edit" lay-event="edit" style="display:none">编辑</a>
+    <a class="layui-btn layui-btn-xs user-edit" lay-event="user-edit" style="display:none">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs user-delete" lay-event="del" style="display:none">删除</a>
 </script>
 <script type="text/javascript" src="../user/userInfo.js"></script>

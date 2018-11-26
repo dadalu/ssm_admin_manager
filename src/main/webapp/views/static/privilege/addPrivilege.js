@@ -24,6 +24,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
 
                 } else {
                     msg.style.color = "red";
+                    layer.msg("权限添加失败");
                     msg.innerHTML = data.message;
                 }
             }, error: function () {

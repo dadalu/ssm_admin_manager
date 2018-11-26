@@ -29,8 +29,8 @@ public class RoleServiceImpl implements RoleService {
     /**
      *查看角色
      */
-    public List getRole(){
-        List list = roleRapper.getRole();
+    public List getRole(Map map){
+        List list = roleRapper.getRole(map);
         return list;
     }
 

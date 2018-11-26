@@ -19,72 +19,97 @@ public class PrivilegeController {
     /*
     *
      * @Author XiaochengWang
-     * @Description //TODO 
+     * @Description //TODO 获取权限
      * @Param [map]
      * @return java.util.Map
      **/
     @RequestMapping("/getPrivilege.do")
     public Map getPrivilege(@RequestParam Map map){
+        int code = 0;
+        String message = "查询成功";
         Map returnMap = new HashMap();
         try {
             List list = service.getPrivilege(map);
-            returnMap.put("message","success");
-            returnMap.put("code",0);
+
             returnMap.put("data",list);
             System.out.println(returnMap);
         } catch (Exception e) {
+            code = 1;
+            message = "查询失败";
             e.printStackTrace();
         }
+        returnMap.put("message",message);
+        returnMap.put("code",code);
         return returnMap;
     }
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 添加权限
+     * @Param [map]
+     * @return java.util.Map
+     **/
     @RequestMapping("/insertPrivilege.do")
     public Map insertPrivilege(@RequestParam Map map){
         int code = 0;
-        String message = "success";
+        String message = "保存成功";
         Map returnMap = new HashMap();
         try {
             service.insertPrivilege(map);
         } catch (Exception e) {
+            code = 1;
+            message = "保存失败";
             e.printStackTrace();
         }
         returnMap.put("code",code);
         returnMap.put("message",message);
         return returnMap;
     }
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 删除权限
+     * @Param []
+     * @return java.util.Map
+     **/
     @RequestMapping("/deletePrivilege.do")
-    public Map deletePrivilege(){
-        Map params = new HashMap();
-        params.put("privilegeName","财务");
+    public Map deletePrivilege(@RequestParam Map map){
+        int code = 0;
+        String message = "删除成功";
+        Map returnMap = new HashMap();
         try {
-            service.deletePrivilege(params);
+            service.deletePrivilege(map);
         } catch (Exception e) {
+            code = 1;
+            message = "删除失败";
             e.printStackTrace();
         }
-        return null;
+        returnMap.put("code",code);
+        returnMap.put("message",message);
+        return returnMap;
     }
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 分配权限
+     * @Param [map]
+     * @return java.util.Map
+     **/
     @RequestMapping(value = "/assignPrivilege.do",method = RequestMethod.POST)
     public Map assignPrivilege(@RequestParam Map map) {
-        String str = (String)map.get("params");
-        List<Map<String, Integer>> iterator = (List<Map<String, Integer>>)JSONArray.parse(str);
-        List privilegeList = new ArrayList();
-        Map paramsMap = new HashMap();
-        paramsMap.put("roleId",map.get("roleId"));
-        for (Map<String,Integer> mapList:iterator
-             ) {
-            for (Map.Entry entry:mapList.entrySet()
-                 ) {
-                Map privilegeMap =new HashMap();
-                privilegeMap.put(entry.getKey(),entry.getValue());
-                privilegeList.add(privilegeMap);
-            }
-        }
-        paramsMap.put("privilegeList",privilegeList);
+        int code = 0;
+        String message = "删除成功";
+        Map returnMap = new HashMap();
         try {
-            service.assignPrivilege(paramsMap);
+            service.assignPrivilege(map);
         } catch (Exception e) {
+            code = 1;
+            message = "删除失败";
             e.printStackTrace();
         }
 
-        return map;
+        returnMap.put("code",code);
+        returnMap.put("message",message);
+        return returnMap;
     }
 }

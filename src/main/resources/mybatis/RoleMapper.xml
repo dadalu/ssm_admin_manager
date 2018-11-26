@@ -3,8 +3,8 @@
 <mapper namespace="com.wang.role.mapper.RoleMapper">
     <!--新增角色-->
     <insert id="insertRole" parameterType="Map">
-        INSERT INTO ROLE(role_name)
-        values(#{roleName,jdbcType=VARCHAR});
+        INSERT INTO ROLE(role_name,role_level,role_comment)
+        values(#{roleName,jdbcType=VARCHAR},#{roleLevel,jdbcType=VARCHAR},#{roleComment,jdbcType=VARCHAR});
         /*insert into role_privilege(role_id,privilege_id)*/
         /*insert into role_privilege(role_id,privilege_id)
         select r.role_id,p.privilege_id from role r,privilege p
@@ -24,6 +24,7 @@
     </update>
     <!--查看角色-->
     <select id="getRole" resultType="map">
-        select role_id,role_name from role where flag = 0;
+        select role_id,role_name,role_level,role_comment from role where flag = 0
+        <if test="roleName!=null">and role_name like "%"#{roleName,jdbcType=VARCHAR}"%"</if>
     </select>
 </mapper>

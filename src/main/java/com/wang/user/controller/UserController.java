@@ -99,8 +99,16 @@ public class UserController {
         returnMap.put("message",message);
         return returnMap;
     }
-    @RequestMapping(value = "/updateUser.do")
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 更新用户信息
+     * @Param [params]
+     * @return java.util.Map
+     **/
+    @RequestMapping(value = "/updateUserInfo.do")
     public Map updateUser(@RequestParam Map params) {
+
         int code = 0;
         String message = "保存成功";
         Map returnMap = new HashMap();

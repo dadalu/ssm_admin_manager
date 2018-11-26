@@ -13,7 +13,20 @@ import java.util.Map;
  */
 @Repository
 public interface LoginMapper {
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 获取密码
+     * @Param [map]
+     * @return java.lang.String
+     **/
     String getPassword(Map map);
+    /*
+    *
+     * @Author XiaochengWang
+     * @Description //TODO 获取登陆信息
+     * @Param [map]
+     * @return java.util.Map
+     **/
     Map getLoginInfo(Map map);
-    void deleteUser(Map map);
 }
