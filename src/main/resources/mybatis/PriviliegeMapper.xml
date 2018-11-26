@@ -22,9 +22,7 @@
     </select>
     <!--分配权限给角色-->
     <insert id="assignPrivilege" parameterType="Map">
-        INSERT INTO role_privilege(role_id,privilege_id) values
-        <foreach collection="list" item = "item" separator=",">
+        replace INTO role_privilege(role_id,privilege_id) values
             (#{roleId,jdbcType=DECIMAL},#{privilegeId,jdbcType=DECIMAL})
-        </foreach>
     </insert>
 </mapper>

@@ -26,11 +26,15 @@ public class PrivilegeController {
     @RequestMapping("/getPrivilege.do")
     public Map getPrivilege(@RequestParam Map map){
         Map returnMap = new HashMap();
-        List list = service.getPrivilege(map);
-        returnMap.put("message","success");
-        returnMap.put("code",0);
-        returnMap.put("data",list);
-        System.out.println(returnMap);
+        try {
+            List list = service.getPrivilege(map);
+            returnMap.put("message","success");
+            returnMap.put("code",0);
+            returnMap.put("data",list);
+            System.out.println(returnMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return returnMap;
     }
     @RequestMapping("/insertPrivilege.do")
@@ -51,19 +55,34 @@ public class PrivilegeController {
     public Map deletePrivilege(){
         Map params = new HashMap();
         params.put("privilegeName","财务");
-        service.deletePrivilege(params);
+        try {
+            service.deletePrivilege(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
     @RequestMapping(value = "/assignPrivilege.do",method = RequestMethod.POST)
     public Map assignPrivilege(@RequestParam Map map) {
         String str = (String)map.get("params");
-        List<Map<String, String>> iterator = (List<Map<String, String>>)JSONArray.parse(str);
-        for (Map<String,String> mapList:iterator
+        List<Map<String, Integer>> iterator = (List<Map<String, Integer>>)JSONArray.parse(str);
+        List privilegeList = new ArrayList();
+        Map paramsMap = new HashMap();
+        paramsMap.put("roleId",map.get("roleId"));
+        for (Map<String,Integer> mapList:iterator
              ) {
             for (Map.Entry entry:mapList.entrySet()
                  ) {
-                System.out.println(entry.getKey()+" "+entry.getValue());
+                Map privilegeMap =new HashMap();
+                privilegeMap.put(entry.getKey(),entry.getValue());
+                privilegeList.add(privilegeMap);
             }
+        }
+        paramsMap.put("privilegeList",privilegeList);
+        try {
+            service.assignPrivilege(paramsMap);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return map;

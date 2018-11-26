@@ -11,13 +11,14 @@
         </if>-->
         <choose>
             <when test="userName!=null">
-                and user_name = #{userName,jdbcType = VARCHAR}
+                and user_name like "%"#{userName,jdbcType = VARCHAR}"%"
             </when>
             <otherwise>
                 limit #{num,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
             </otherwise>
         </choose>
 	</select>
+    <!--获取用户数-->
     <select id="getUserCount" parameterType="map" resultType="Map">
         select count(*) as count from user where flag = 0;
 	</select>

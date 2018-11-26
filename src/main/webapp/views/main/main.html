@@ -16,6 +16,9 @@
 
     <div class="layui-header">
         <div class="layui-logo">权限管理平台</div>
+        <!--<ul class="layui-nav layui-layout-left">
+            <li id="animation-left-nav">隐藏菜单</li>
+        </ul>-->
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item topTab"><a href="">增加菜单</a></li>
             <li class="layui-nav-item layui-this topTab"><a href="">增加角色</a></li>
@@ -106,8 +109,27 @@
                 layui.element.init(); //一定初始化一次
             }
         })
+
     });
-    $()
+    //通过图标id来触发左侧导航栏收缩功能动画效果
+    $('#animation-left-nav').click(function(){
+        //这里定义一个全局变量来方便判断动画收缩的效果,也就是放在最外面
+        if(i==0){
+            $(".layui-side").animate({width:'toggle'});
+            $(".layui-body").animate({left:'0px'});
+            i++;
+        }else{
+            $(".layui-side").animate({width:'toggle'});
+            $(".layui-body").animate({left:'200px'});
+            i--;
+        }
+    });
+    //左侧导航栏收缩提示
+    $('#animation-left-nav').hover(function(){
+        layer.tips('收缩左侧导航栏', '#animation-left-nav', {tips:[4,'#FF8000'],time:0});
+    },function(){
+        layer.closeAll('tips');
+    });
     //添加选项卡
     function addTab(name, url) {
         if (layui.jquery(".layui-tab-title li[lay-id='" + name + "']").length > 0) {

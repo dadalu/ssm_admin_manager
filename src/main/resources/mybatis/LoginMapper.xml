@@ -5,7 +5,7 @@
 	<select id="getPassword" parameterType="map" resultType="String">
 		select password from user where user_name = #{username,jdbcType = VARCHAR};
 	</select>
-    <!--用户查看个人信息-->
+    <!--用户登录后获取个人角色信息-->
     <select id="getLoginInfo"  parameterType="map" resultType="java.util.Map">
         select u.user_id,u.user_name,r.role_id,r.role_name from user u
         left join user_role ur on u.user_id=ur.user_id

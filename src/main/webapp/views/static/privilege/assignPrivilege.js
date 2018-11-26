@@ -40,13 +40,12 @@ layui.use(['form', 'layer', 'jquery'], function () {
                     arr.push(privilege);
                 }
             }
-        arr.push({'roleId':sessionStorage.getItem("assignRoleId")});
             var params = JSON.stringify(arr);
         var msg = document.getElementById("register");
         var index = layer.msg('正在提交，请稍候', {icon: 16, time: false});
         $.ajax({
             type: "post",
-            url: "/privilege/assignPrivilege.do",
+            url: "/privilege/assignPrivilege.do?roleId="+sessionStorage.getItem("assignRoleId"),
             data:  "params="+params,
             dataType:"json",
             success: function (data) {

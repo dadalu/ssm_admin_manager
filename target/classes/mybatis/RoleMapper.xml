@@ -11,17 +11,14 @@
         where r.role_name = '超级管理员' and p.privilege_name = 'aaa';*/
     </insert>
     <!--为角色分配权限-->
-    <insert id="assignPrivilege" parameterType="map">
+    <!--<insert id="assignPrivilege" parameterType="map">
         <foreach collection="list" item="privilegeList" separator=",">
             insert into role_privilege(role_id,privilege_id) values
             select role_id,#{privilegeList.privilegeId} as privilege_id
             from role where role_name = #{roleName,jdbcType=VARCHAR},
         </foreach>
-    </insert>
+    </insert>-->
     <!--删除角色，设置删除标志位为1，并不删除实际数据-->
-    <!--<delete id="deleteRole" parameterType="Map">
-        delete from role where role_name = #{roleName,jdbcType=VARCHAR}
-    </delete>-->
     <update id="deleteRole" parameterType="map">
         update role set flag = 1 where role_name = #{roleName,jdbcType=VARCHAR}
     </update>

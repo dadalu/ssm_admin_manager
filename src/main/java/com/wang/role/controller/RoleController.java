@@ -25,12 +25,14 @@ public class RoleController {
     @RequestMapping("/getRole.do")
     public Map getRole(){
         int code =0;
-        String message = "success";
+        String message = "角色查询成功";
         Map returnMap = new HashMap();
         List list = null;
         try {
             list = service.getRole();
         } catch (Exception e) {
+            code=1;
+            message = "角色查询失败";
             e.printStackTrace();
         }
         System.out.println(returnMap);
@@ -50,7 +52,7 @@ public class RoleController {
     @RequestMapping("/insertRole.do")
     public Map insertRole(@RequestParam Map map){
         int code =0;
-        String message = "success";
+        String message = "角色添加成功";
         Map returnMap = new HashMap();
         try {
             service.insertRole(map);
@@ -73,11 +75,13 @@ public class RoleController {
     @RequestMapping("/deleteRole.do")
     public Map deleteRole(@RequestParam Map map){
         int code =0;
-        String message = "success";
+        String message = "角色删除成功";
         Map returnMap = new HashMap();
         try {
             service.deleteRole(map);
         } catch (Exception e) {
+            code=1;
+            message = "角色删除失败";
             e.printStackTrace();
         }
         returnMap.put("message",message);

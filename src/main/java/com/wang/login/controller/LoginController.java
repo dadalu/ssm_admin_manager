@@ -20,7 +20,13 @@ public class LoginController {
 	private LoginService loginService;
 	@Autowired
 	private User user;
-
+	/*
+	*
+	 * @Author XiaochengWang
+	 * @Description //TODO 登录操作，并获取用户信息
+	 * @Param [params]
+	 * @return java.util.Map
+	 **/
 	@RequestMapping(value = "/login.do")
 	public Map hello(@RequestParam Map params) {
 		int code = 2;
@@ -43,7 +49,7 @@ public class LoginController {
 		return returnMap;
 
 	}
-	@RequestMapping(value = "/getLoginInfo.do")
+	/*@RequestMapping(value = "/getLoginInfo.do")
 	@ResponseBody
 	public Map getLoginInfo() {
 		int code = 0;
@@ -57,7 +63,7 @@ public class LoginController {
 		returnMap.put("message",message);
 		returnMap.put("user",user);
 		return returnMap;
-	}
+	}*/
 
 
 }

@@ -109,7 +109,6 @@ layui.use(['table','element','laypage'], function(){
         }
     });
     //搜索
-    //订单搜索
 
     $('#searchBtn').on('click',function(){
         var type = $(this).data('type');

@@ -20,13 +20,18 @@ public class MenuController {
     /*
     *
      * @Author XiaochengWang
-     * @Description //TODO 
+     * @Description //TODO 获取菜单
      * @Param [map]
      * @return java.util.Map
      **/
     @RequestMapping("/getMenu.do")
     public List getMenu(@RequestParam Map map){
-        List returnList = service.getMenu(map);
+        List returnList = null;
+        try {
+            returnList = service.getMenu(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(returnList);
         return returnList;
     }

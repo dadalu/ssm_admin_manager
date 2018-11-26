@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wang.menu.mapper.MenuMapper">
-	
+	<!--查询菜单-->
 	<select id="getMenu" parameterType="map" resultType="java.util.Map">
 		SELECT m.menu_id as id,m.menu_name as name,m.menu_url as url,m.menu_parent_id as pId
 		from menu m left join role_menu rm on m.menu_id =rm.menu_id
 		left join role r on rm.role_id = r.role_id
 		where r.role_id=#{roleId,jdbcType=DECIMAL} and m.flag = 0;
 	</select>
+	<!--插入菜单-->
 	<insert id="insertMenu" parameterType="map">
 		insert into Menu(menu_name,menu_url,menu_parent_id) values(
 		#{name,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{pId,jdbcType=VARCHAR}

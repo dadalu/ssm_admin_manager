@@ -54,11 +54,11 @@
         $("#sub").on("click",function(){
             login();
         })
-        /*$("body").keydown(function(){
-            if(event.keyCode == "13"){
+        $("body").keydown(function(event){
+            if(event.keyCode ==13){
                 login();
             }
-        })*/
+        })
         //登录函数
         function login(){
             var username = $(" input[ name='username' ] ").val();
