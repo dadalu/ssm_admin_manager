@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: base-provider
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/application
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    sql-script-encoding: UTF-8
+    hikari:
+      auto-commit: true
+      pool-name: HikariCP
+      connection-timeout: 90000
+      minimum-idle: 5
+      maximum-pool-size: 1000
+      idle-timeout: 60000
+      max-lifetime: 18000000
+      connection-test-query: select 1
+mybatis-plus:
+  configuration:
+    auto-mapping-behavior: full
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:**/mapper/*Mapper.xml
+
+logging:
+  level:
+    com.wxc: info
